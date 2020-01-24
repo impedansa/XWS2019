@@ -1,10 +1,14 @@
 package com.megatravel.apartments.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import com.megatravel.apartments.dto.CommodityDTO;
 
@@ -20,6 +24,9 @@ public class Commodity {
 	
 	@Column(unique = false, length = 512)
 	private String description;
+	
+	@ManyToMany
+	private List<Apartment> apartments = new ArrayList<Apartment>();
 	
 	public Commodity() { }
 	
@@ -57,6 +64,10 @@ public class Commodity {
 		this.name = commodityDTO.getName();
 		this.description = commodityDTO.getDescription();
 		return this;
+	}
+
+	public List<Apartment> getApartments() {
+		return apartments;
 	}
 	
 }

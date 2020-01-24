@@ -1,10 +1,14 @@
 package com.megatravel.apartments.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.megatravel.apartments.dto.ApartmentTypeDTO;
 
@@ -20,6 +24,9 @@ public class ApartmentType {
 	
 	@Column(unique = false, length = 512)
 	private String description;
+	
+	@OneToMany(mappedBy = "type")
+	private List<Apartment> apartments = new ArrayList<Apartment>();
 	
 	public ApartmentType() { }
 	
@@ -55,5 +62,9 @@ public class ApartmentType {
 		this.name = apartmentTypeDTO.getName();
 		this.description = apartmentTypeDTO.getDescription();
 		return this;
+	}
+
+	public List<Apartment> getApartments() {
+		return apartments;
 	}
 }
