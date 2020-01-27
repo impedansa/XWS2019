@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -38,7 +39,7 @@ public class ApartmentsService {
 		List<Apartment> result = getAll();
 		result.removeIf(apartment -> !apartment.getCity().contains(apartmentsSearchDTO.getCity()));
 		result.removeIf(apartment -> apartment.getCapacity() < apartmentsSearchDTO.getCapacity());
-		result.removeIf(apartment -> !reservationsService.apartmentIsFree(apartment));
+		result.removeIf(apartment -> !reservationsService.apartmentIsFree(apartment, Pair.of(apartmentsSearchDTO.getStart(), apartmentsSearchDTO.getEnd())));
 		return result;
 	}
 	

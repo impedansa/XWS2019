@@ -1,5 +1,6 @@
 package com.megatravel.apartments.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Min;
 
 import com.megatravel.apartments.dto.ApartmentDTO;
@@ -40,7 +42,10 @@ public class Apartment {
 	private ApartmentType type;
 	
 	@ManyToMany
-	private List<Commodity> commodities;
+	private List<Commodity> commodities = new ArrayList<Commodity>();
+	
+	@OneToMany(mappedBy = "apartment")
+	private List<Reservation> reservations = new ArrayList<Reservation>();
 	
 	public Apartment() { }
 	
@@ -114,6 +119,10 @@ public class Apartment {
 
 	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
 	}
 	
 }
