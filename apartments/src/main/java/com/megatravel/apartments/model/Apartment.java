@@ -41,6 +41,9 @@ public class Apartment {
 	@ManyToOne
 	private ApartmentType type;
 	
+	@Column(nullable = false)
+	private Boolean cancelable;
+	
 	@ManyToMany
 	private List<Commodity> commodities = new ArrayList<Commodity>();
 	
@@ -55,6 +58,7 @@ public class Apartment {
 		this.city = apartmentDTO.getCity();
 		this.address = apartmentDTO.getAddress();
 		this.capacity = apartmentDTO.getCapacity();
+		this.cancelable = apartmentDTO.getCancelable();
 	}
 
 	public Long getId() {
@@ -123,6 +127,14 @@ public class Apartment {
 
 	public List<Reservation> getReservations() {
 		return reservations;
+	}
+
+	public Boolean getCancelable() {
+		return cancelable;
+	}
+
+	public void setCancelable(Boolean cancelable) {
+		this.cancelable = cancelable;
 	}
 	
 }

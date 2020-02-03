@@ -21,6 +21,7 @@ public class Message {
 	
 	private Long recipientId;
 	
+	@Column(columnDefinition = "TIMESTAMP")
 	private LocalDateTime time;
 	
 	@Column(length = 512)

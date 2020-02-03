@@ -11,7 +11,7 @@ import com.megatravel.messages.model.Message;
 @Repository
 public interface MessagesRepository extends JpaRepository<Message, Long> {
 
-	@Query("SELECT * FROM message WHERE senderId = :senderId AND recipientID = :recipientID ORDER BY time DESC")
+	@Query("SELECT m FROM Message m WHERE senderId = :senderId AND recipientID = :recipientID ORDER BY time DESC")
 	List<Message> findMessagesBetween(Long senderId, Long recipientId);
 
 	List<Message> findAllBySenderId(Long senderId);

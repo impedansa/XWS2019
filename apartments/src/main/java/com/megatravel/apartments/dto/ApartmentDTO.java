@@ -14,6 +14,7 @@ public class ApartmentDTO {
 	private String address;
 	private ApartmentCategoryDTO category;
 	private ApartmentTypeDTO type;
+	private Boolean cancelable;
 	private List<CommodityDTO> commodities;
 
 	public ApartmentDTO() { }
@@ -26,6 +27,7 @@ public class ApartmentDTO {
 		this.address = apartment.getAddress();
 		this.category = new ApartmentCategoryDTO(apartment.getCategory());
 		this.type = new ApartmentTypeDTO(apartment.getType());
+		this.cancelable = apartment.getCancelable();
 		this.commodities = CommodityDTO.transform(apartment.getCommodities());
 	}
 
@@ -97,6 +99,14 @@ public class ApartmentDTO {
 
 	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
+	}
+
+	public Boolean getCancelable() {
+		return cancelable;
+	}
+
+	public void setCancelable(Boolean cancelable) {
+		this.cancelable = cancelable;
 	}
 	
 }

@@ -22,6 +22,7 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private UserState state;
 	
+	@Column(columnDefinition = "DATE")
 	private LocalDate birthday;
 	
 	@Column(unique = true)

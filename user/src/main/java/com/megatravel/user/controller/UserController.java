@@ -25,12 +25,12 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method = RequestMethod.POST, value = "/login", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDTO> login(@RequestBody LoginDTO loginDTO) {
 		return new ResponseEntity<UserDTO>(new UserDTO(userService.login(loginDTO)), HttpStatus.OK);
 	}
 	
-	@RequestMapping(method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method = RequestMethod.POST, value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UserDTO> register(@RequestBody RegistrationDTO registrationDTO) {
 		return new ResponseEntity<UserDTO>(new UserDTO(userService.register(registrationDTO)), HttpStatus.CREATED);
 	}

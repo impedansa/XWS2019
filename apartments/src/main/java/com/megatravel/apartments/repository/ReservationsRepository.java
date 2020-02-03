@@ -11,7 +11,7 @@ import com.megatravel.apartments.model.Reservation;
 @Repository
 public interface ReservationsRepository extends JpaRepository<Reservation, Long> {
 
-	@Query("SELECT * FROM reservation WHERE user = :user")
+	@Query("SELECT r FROM Reservation r WHERE user = :user")
 	List<Reservation> findAllByUser(Long user);
 
 }
