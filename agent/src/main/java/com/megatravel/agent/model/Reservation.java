@@ -1,4 +1,4 @@
-package com.megatravel.apartments.model;
+package com.megatravel.agent.model;
 
 import java.time.LocalDate;
 
@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 
-import com.megatravel.apartments.dto.ReservationDTO;
+import com.megatravel.agent.dto.ReservationDTO;
 
 @Entity
 public class Reservation {
@@ -29,8 +29,8 @@ public class Reservation {
 	@Column(nullable = false)
 	private LocalDate end;
 	
-	@Column(nullable = false)
-	private Long user;
+	@ManyToOne
+	private User user;
 	
 	@ManyToOne
 	private Apartment apartment;
@@ -39,12 +39,11 @@ public class Reservation {
 	private Boolean realised;
 	
 	public Reservation() { }
-	
+
 	public Reservation(ReservationDTO reservationDTO) {
 		this.id = reservationDTO.getId();
 		this.start = reservationDTO.getStart();
 		this.end = reservationDTO.getEnd();
-		this.user = reservationDTO.getUser();
 		this.realised = false;
 	}
 
@@ -80,11 +79,11 @@ public class Reservation {
 		this.end = end;
 	}
 
-	public Long getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(Long user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 

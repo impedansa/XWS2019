@@ -1,10 +1,10 @@
-package com.megatravel.apartments.dto;
+package com.megatravel.agent.dto;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.megatravel.apartments.model.Reservation;
+import com.megatravel.agent.model.Reservation;
 
 public class ReservationDTO {
 
@@ -23,7 +23,7 @@ public class ReservationDTO {
 		this.price = reservation.getPrice();
 		this.start = reservation.getStart();
 		this.end = reservation.getEnd();
-		this.user = reservation.getUser();
+		this.user = reservation.getUser().getId();
 		this.apartment = new ApartmentDTO(reservation.getApartment());
 		this.realised = reservation.getRealised();
 	}
