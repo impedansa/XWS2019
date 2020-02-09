@@ -1,0 +1,8 @@
+export const APARTMENTS = 'APARTMENTS'
+export const LOGIN = 'LOGIN'
+export const INBOX = 'INBOX'
+export const RESERVATIONS_HISTORY = 'RESERVATIONS_HISTORY'
+export const TYPES = 'TYPES'
+export const CATEGORIES = 'CATEGORIES'
+export const USERS = 'USERS'
+export const REGISTRATION = 'REGISTRATION'

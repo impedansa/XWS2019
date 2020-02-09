@@ -50,8 +50,8 @@ public class UserController {
 		return new ResponseEntity<UserDTO>(new UserDTO(userService.findUserById(id)), HttpStatus.OK);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, value = "/users/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UserDTO> changeUserState(@PathVariable("id") Long id, @RequestBody UserState state) {
+	@RequestMapping(method = RequestMethod.POST, value = "/users/{id}/{state}")
+	public ResponseEntity<UserDTO> changeUserState(@PathVariable("id") Long id, @PathVariable("state") UserState state) {
 		return new ResponseEntity<UserDTO>(new UserDTO(userService.changeActiveState(id, state)), HttpStatus.ACCEPTED);
 	}
 }

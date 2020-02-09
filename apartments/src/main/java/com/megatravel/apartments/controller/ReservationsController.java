@@ -22,14 +22,9 @@ public class ReservationsController {
 	@Autowired
 	private ReservationsService reservationsService;
 	
-	@RequestMapping(value = "/users/{user-id}/history")
-	public ResponseEntity<List<ReservationDTO>> getReservationHistoryOfUser(@PathVariable("user-id") Long userId) {
-		return new ResponseEntity<List<ReservationDTO>>(ReservationDTO.transform(reservationsService.getReservationHistoryOfUser(userId)), HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/users/{user-id}/active")
-	public ResponseEntity<List<ReservationDTO>> getActiveReservationsOfUser(@PathVariable("user-id") Long userId) {
-		return new ResponseEntity<List<ReservationDTO>>(ReservationDTO.transform(reservationsService.getActiveReservationsOfUser(userId)), HttpStatus.OK);
+	@RequestMapping(value = "/users/{user-id}/reservations")
+	public ResponseEntity<List<ReservationDTO>> getReservationsOfUser(@PathVariable("user-id") Long userId) {
+		return new ResponseEntity<List<ReservationDTO>>(ReservationDTO.transform(reservationsService.getReservationsOfUser(userId)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/reservations", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

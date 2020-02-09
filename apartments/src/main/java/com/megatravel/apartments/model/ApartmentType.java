@@ -31,7 +31,8 @@ public class ApartmentType {
 	public ApartmentType() { }
 	
 	public ApartmentType(ApartmentTypeDTO apartmentTypeDTO) {
-		
+		this.name = apartmentTypeDTO.getName();
+		this.description = apartmentTypeDTO.getDescription();
 	}
 
 	public Long getId() {

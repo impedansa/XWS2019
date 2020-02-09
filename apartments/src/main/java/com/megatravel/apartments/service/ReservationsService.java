@@ -35,25 +35,12 @@ public class ReservationsService {
 		return reservations.isEmpty();
 	}
 	
-	public List<Reservation> getReservationHistoryOfUser(Long userId) {
+	public List<Reservation> getReservationsOfUser(Long userId) {
 		if(userExists(userId)) {
-			List<Reservation> reservations = reservationsRepository.findAllByUser(userId);
-			reservations.removeIf(reservation -> reservation.getEnd().isBefore(LocalDate.now()));
-			return reservations;
+			return reservationsRepository.findAllByUser(userId);
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 		}
-	}
-
-	public List<Reservation> getActiveReservationsOfUser(Long userId) {
-		if(userExists(userId)) {
-			List<Reservation> reservations = reservationsRepository.findAllByUser(userId);
-			reservations.removeIf(reservation -> !reservation.getEnd().isBefore(LocalDate.now()));
-			return reservations;			
-		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-		}
-	
 	}
 	
 	private Reservation getById(Long id) {

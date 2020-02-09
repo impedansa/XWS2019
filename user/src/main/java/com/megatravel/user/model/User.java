@@ -42,14 +42,13 @@ public class User {
 	
 	public User(RegistrationDTO registrationDTO) {
 		super();
-		this.id = registrationDTO.getId();
 		this.state = UserState.ACTIVE;
 		this.birthday = registrationDTO.getBirthday();
 		this.email = registrationDTO.getEmail();
 		this.password = registrationDTO.getPassword();
 		this.name = registrationDTO.getName();
 		this.phoneNumber = registrationDTO.getPhoneNumber();
-		this.role = registrationDTO.getRole();
+		this.role = UserRole.REGULAR;
 	}
 	
 	public Long getId() {
