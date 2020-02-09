@@ -80,4 +80,32 @@ public class ReservationsService {
 	private Boolean userExists(Long userId) {
 		return userServiceInterface.getUser(userId).getStatusCode().is2xxSuccessful();
 	}
+
+	public Reservation createAgentReservation(com.megatravel.apartments.soap.ReservationDTO reservationDTO) {
+		Apartment apartment = apartmentsService.getById(reservationDTO.getApartment().getId());
+		LocalDate start = LocalDate.of(
+				reservationDTO.getStart().getYear(), 
+				reservationDTO.getStart().getMonth(), 
+				reservationDTO.getStart().getDay()
+				);
+		LocalDate end = LocalDate.of(
+				reservationDTO.getEnd().getYear(), 
+				reservationDTO.getEnd().getMonth(), 
+				reservationDTO.getEnd().getDay()
+				);
+		if(apartmentIsFree(apartment, Pair.of(start, end))) {
+			Reservation reservation = new Reservation(reservationDTO);
+			reservation.setPrice(apartment.getPrice() * ChronoUnit.DAYS.between(start, end));
+			reservation.setApartment(apartment);
+			return reservationsRepository.save(reservation);
+		} else {
+			throw new ResponseStatusException(HttpStatus.CONFLICT);
+		}	
+	}
+
+	public Reservation confirmReservation(Long id) {
+		Reservation reservation = this.getById(id);
+		reservation.setRealised(true);
+		return reservationsRepository.save(reservation);
+	}
 }

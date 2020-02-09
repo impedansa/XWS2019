@@ -10,9 +10,8 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.megatravel.agent.dto.LoginDTO;
 import com.megatravel.agent.model.User;
-import com.megatravel.agent.model.UserRole;
-import com.megatravel.agent.model.UserState;
 import com.megatravel.agent.repository.UserRepository;
+import com.megatravel.agent.soap.communication.UserServiceCommunication;
 
 @Service
 public class UserService {
@@ -20,11 +19,12 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private UserServiceCommunication userServiceCommunication;
+	
 	public User login(LoginDTO loginDTO) {
 		User user = findUserByEmail(loginDTO.getEmail());
-		if(user.getPassword().equals(loginDTO.getPassword()) &&
-				user.getRole().equals(UserRole.AGENT) &&
-				user.getState().equals(UserState.ACTIVE)) {
+		if(userServiceCommunication.loginAgent(loginDTO.getEmail(), loginDTO.getPassword())) {
 			return user;
 		} else {
 			throw new ResponseStatusException(HttpStatus.CONFLICT);

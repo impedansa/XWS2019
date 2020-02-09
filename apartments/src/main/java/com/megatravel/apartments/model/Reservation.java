@@ -29,7 +29,7 @@ public class Reservation {
 	@Column(nullable = false)
 	private LocalDate end;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Long user;
 	
 	@ManyToOne
@@ -46,6 +46,21 @@ public class Reservation {
 		this.end = reservationDTO.getEnd();
 		this.user = reservationDTO.getUser();
 		this.realised = false;
+	}
+	
+	public Reservation(com.megatravel.apartments.soap.ReservationDTO reservationDTO) {
+		this.id = reservationDTO.getId();
+		this.start = LocalDate.of(
+				reservationDTO.getStart().getYear(), 
+				reservationDTO.getStart().getMonth(), 
+				reservationDTO.getStart().getDay()
+				);
+		this.end = LocalDate.of(
+				reservationDTO.getEnd().getYear(), 
+				reservationDTO.getEnd().getMonth(), 
+				reservationDTO.getEnd().getDay()
+				);
+		this.realised = false;	
 	}
 
 	public Long getId() {

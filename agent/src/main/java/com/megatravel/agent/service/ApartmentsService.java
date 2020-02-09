@@ -13,6 +13,7 @@ import com.megatravel.agent.dto.ApartmentDTO;
 import com.megatravel.agent.dto.ApartmentsSearchDTO;
 import com.megatravel.agent.model.Apartment;
 import com.megatravel.agent.repository.ApartmentsRepository;
+import com.megatravel.agent.soap.communication.ApartmentServiceCommunication;
 
 @Service
 public class ApartmentsService {
@@ -28,6 +29,9 @@ public class ApartmentsService {
 	
 	@Autowired
 	private ApartmentCategoriesService apartmentCategoriesService;
+	
+	@Autowired
+	private ApartmentServiceCommunication apartmentServiceCommunication;
 	
 	public List<Apartment> getAll() {
 		return apartmentsRepository.findAll();
@@ -54,6 +58,7 @@ public class ApartmentsService {
 		Apartment apartment = new Apartment(apartmentDTO);
 		apartment.setType(apartmentTypesService.getById(apartmentDTO.getType().getId()));
 		apartment.setCategory(apartmentCategoriesService.getById(apartmentDTO.getCategory().getId()));
+		if(!apartmentServiceCommunication.createApartment(apartment)) throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
 		return apartmentsRepository.save(apartment);
 	}
 	

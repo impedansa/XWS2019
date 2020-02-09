@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.megatravel.com/apartments/soap" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.megatravel.com/apartments/soap" targetNamespace="http://www.megatravel.com/apartments/soap">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.megatravel.com/apartments/soap">
+            <xs:complexType name="ReservationDTO">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                    <xs:element name="start" type="xs:date"/>
+                    <xs:element name="end" type="xs:date"/>
+                    <xs:element name="apartment" type="tns:ApartmentDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ApartmentDTO">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                    <xs:element name="city" type="xs:string"/>
+                    <xs:element name="address" type="xs:string"/>
+                    <xs:element name="capacity" type="xs:int"/>
+                    <xs:element name="cancelable" type="xs:boolean"/>
+                    <xs:element name="price" type="xs:double"/>
+                    <xs:element name="type" type="tns:ApartmentTypeDTO"/>
+                    <xs:element name="category" type="tns:ApartmentCategoryDTO"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ApartmentTypeDTO">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="ApartmentCategoryDTO">
+                <xs:sequence>
+                    <xs:element name="id" type="xs:long"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="createApartmentRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="unit" type="tns:ApartmentDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createApartmentResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="okay" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createReservationRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="reservation" type="tns:ReservationDTO"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="createReservationResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="okay" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="confirmReservationRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="reservation" type="xs:long"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="confirmReservationResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="okay" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="createApartmentRequest">
+        <wsdl:part element="tns:createApartmentRequest" name="createApartmentRequest">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createApartmentResponse">
+        <wsdl:part element="tns:createApartmentResponse" name="createApartmentResponse">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="confirmReservationResponse">
+        <wsdl:part element="tns:confirmReservationResponse" name="confirmReservationResponse">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createReservationResponse">
+        <wsdl:part element="tns:createReservationResponse" name="createReservationResponse">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createReservationRequest">
+        <wsdl:part element="tns:createReservationRequest" name="createReservationRequest">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="confirmReservationRequest">
+        <wsdl:part element="tns:confirmReservationRequest" name="confirmReservationRequest">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="ApartmentsPort">
+        <wsdl:operation name="createApartment">
+            <wsdl:input message="tns:createApartmentRequest" name="createApartmentRequest">
+    </wsdl:input>
+            <wsdl:output message="tns:createApartmentResponse" name="createApartmentResponse">
+    </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="confirmReservation">
+            <wsdl:input message="tns:confirmReservationRequest" name="confirmReservationRequest">
+    </wsdl:input>
+            <wsdl:output message="tns:confirmReservationResponse" name="confirmReservationResponse">
+    </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createReservation">
+            <wsdl:input message="tns:createReservationRequest" name="createReservationRequest">
+    </wsdl:input>
+            <wsdl:output message="tns:createReservationResponse" name="createReservationResponse">
+    </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="ApartmentsPortSoap11" type="tns:ApartmentsPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="createApartment">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="createApartmentRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="createApartmentResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="confirmReservation">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="confirmReservationRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="confirmReservationResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createReservation">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="createReservationRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="createReservationResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="ApartmentsPortService">
+        <wsdl:port binding="tns:ApartmentsPortSoap11" name="ApartmentsPortSoap11">
+            <soap:address location="http://localhost:8762/apartments-service/services"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

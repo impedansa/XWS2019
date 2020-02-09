@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.megatravel.com/user/soap" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.megatravel.com/user/soap" targetNamespace="http://www.megatravel.com/user/soap">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.megatravel.com/user/soap">
+            <xs:element name="agentLoginRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="email" type="xs:string"/>
+                        <xs:element name="password" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="agentLoginResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="okay" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="agentLoginRequest">
+        <wsdl:part element="tns:agentLoginRequest" name="agentLoginRequest">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="agentLoginResponse">
+        <wsdl:part element="tns:agentLoginResponse" name="agentLoginResponse">
+    </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="UsersPort">
+        <wsdl:operation name="agentLogin">
+            <wsdl:input message="tns:agentLoginRequest" name="agentLoginRequest">
+    </wsdl:input>
+            <wsdl:output message="tns:agentLoginResponse" name="agentLoginResponse">
+    </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="UsersPortSoap11" type="tns:UsersPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="agentLogin">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="agentLoginRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="agentLoginResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="UsersPortService">
+        <wsdl:port binding="tns:UsersPortSoap11" name="UsersPortSoap11">
+            <soap:address location="http://localhost:8762/user-service/services"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -47,7 +48,7 @@ public class Apartment {
 	@ManyToMany
 	private List<Commodity> commodities = new ArrayList<Commodity>();
 	
-	@OneToMany(mappedBy = "apartment")
+	@OneToMany(mappedBy = "apartment", fetch = FetchType.EAGER)
 	private List<Reservation> reservations = new ArrayList<Reservation>();
 	
 	public Apartment() { }
@@ -59,6 +60,14 @@ public class Apartment {
 		this.address = apartmentDTO.getAddress();
 		this.capacity = apartmentDTO.getCapacity();
 		this.cancelable = apartmentDTO.getCancelable();
+	}
+	
+	public Apartment(com.megatravel.apartments.soap.ApartmentDTO apartmentDTO) {
+		this.price = apartmentDTO.getPrice();
+		this.city = apartmentDTO.getCity();
+		this.address = apartmentDTO.getAddress();
+		this.capacity = apartmentDTO.getCapacity();
+		this.cancelable = apartmentDTO.isCancelable();
 	}
 
 	public Long getId() {

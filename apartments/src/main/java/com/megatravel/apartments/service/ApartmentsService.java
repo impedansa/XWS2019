@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.megatravel.apartments.dto.ApartmentsSearchDTO;
 import com.megatravel.apartments.model.Apartment;
 import com.megatravel.apartments.repository.ApartmentsRepository;
+import com.megatravel.apartments.soap.ApartmentDTO;
 
 @Service
 public class ApartmentsService {
@@ -21,6 +22,12 @@ public class ApartmentsService {
 	
 	@Autowired
 	private ReservationsService reservationsService;
+	
+	@Autowired
+	private ApartmentTypesService apartmentTypesService;
+	
+	@Autowired
+	private ApartmentCategoriesService apartmentCategoriesService;
 	
 	public List<Apartment> getAll() {
 		return apartmentsRepository.findAll();
@@ -41,6 +48,13 @@ public class ApartmentsService {
 		result.removeIf(apartment -> apartment.getCapacity() < apartmentsSearchDTO.getCapacity());
 		result.removeIf(apartment -> !reservationsService.apartmentIsFree(apartment, Pair.of(apartmentsSearchDTO.getStart(), apartmentsSearchDTO.getEnd())));
 		return result;
+	}
+	
+	public Apartment createApartment(ApartmentDTO apartmentDTO) {
+		Apartment apartment = new Apartment(apartmentDTO);
+		apartment.setType(apartmentTypesService.getById(apartmentDTO.getType().getId()));
+		apartment.setCategory(apartmentCategoriesService.getById(apartmentDTO.getCategory().getId()));
+		return apartmentsRepository.save(apartment);
 	}
 	
 }

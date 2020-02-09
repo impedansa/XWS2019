@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://www.megatravel.com/apartments/soap"
+	targetNamespace="http://www.megatravel.com/apartments/soap"
+	elementFormDefault="qualified">
+	<xs:complexType name="ReservationDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="start" type="xs:date" />
+			<xs:element name="end" type="xs:date" />
+			<xs:element name="apartment" type="tns:ApartmentDTO" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ApartmentDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+			<xs:element name="city" type="xs:string" />
+			<xs:element name="address" type="xs:string" />
+			<xs:element name="capacity" type="xs:int" />
+			<xs:element name="cancelable" type="xs:boolean" />
+			<xs:element name="price" type="xs:double" />
+			<xs:element name="type" type="tns:ApartmentTypeDTO" />
+			<xs:element name="category" type="tns:ApartmentCategoryDTO" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ApartmentTypeDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ApartmentCategoryDTO">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="createApartmentRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="unit" type="tns:ApartmentDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createApartmentResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="okay" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createReservationRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="reservation" type="tns:ReservationDTO" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createReservationResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="okay" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="confirmReservationRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="reservation" type="xs:long" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="confirmReservationResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="okay" type="xs:boolean" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
