@@ -1,5 +1,7 @@
 package com.megatravel.agent.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -34,5 +36,10 @@ public class ReservationsController {
 	@RequestMapping(value = "/reservations/{id}", method = RequestMethod.POST)
 	public ResponseEntity<ReservationDTO> confirmReservation(@PathVariable("id") Long id) {
 		return new ResponseEntity<ReservationDTO>(new ReservationDTO(reservationsService.confirmReservation(id)), HttpStatus.ACCEPTED);
+	}
+	
+	@RequestMapping(value = "/reservations", method = RequestMethod.GET)
+	public ResponseEntity<List<ReservationDTO>> getAllReservation() {
+		return new ResponseEntity<List<ReservationDTO>>(ReservationDTO.transform(reservationsService.getAll()), HttpStatus.OK);
 	}
 }

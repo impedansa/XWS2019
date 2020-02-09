@@ -18,6 +18,10 @@ public class MessageDTO {
 	
 	private String text;
 	
+	public MessageDTO() {
+		time = LocalDateTime.now();
+	}
+	
 	public MessageDTO(Message message) {
 		this.id = message.getId();
 		this.senderId = message.getSender().getId();

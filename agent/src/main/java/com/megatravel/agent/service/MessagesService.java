@@ -31,6 +31,8 @@ public class MessagesService {
 			throw new ResponseStatusException(HttpStatus.CONFLICT);
 		} else {
 			Message message = new Message(messageDTO);
+			message.setSender(userService.findUserById(senderId));
+			message.setRecipient(userService.findUserById(recipientId));
 			return messagesRepository.save(message);
 		}
 	}

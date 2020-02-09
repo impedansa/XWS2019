@@ -70,5 +70,9 @@ public class ReservationsService {
 			throw new ResponseStatusException(HttpStatus.CONFLICT);
 		}
 	}
+
+	public List<Reservation> getAll() {
+		return reservationsRepository.findAll();
+	}
 	
 }

@@ -23,7 +23,7 @@ public class UserService {
 	public User login(LoginDTO loginDTO) {
 		User user = findUserByEmail(loginDTO.getEmail());
 		if(user.getPassword().equals(loginDTO.getPassword()) &&
-				!user.getRole().equals(UserRole.AGENT) &&
+				user.getRole().equals(UserRole.AGENT) &&
 				user.getState().equals(UserState.ACTIVE)) {
 			return user;
 		} else {

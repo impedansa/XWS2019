@@ -54,7 +54,7 @@ public class ApartmentsService {
 		Apartment apartment = new Apartment(apartmentDTO);
 		apartment.setType(apartmentTypesService.getById(apartmentDTO.getType().getId()));
 		apartment.setCategory(apartmentCategoriesService.getById(apartmentDTO.getCategory().getId()));
-		return null;
+		return apartmentsRepository.save(apartment);
 	}
 	
 }

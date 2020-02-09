@@ -23,7 +23,7 @@ public class ReservationDTO {
 		this.price = reservation.getPrice();
 		this.start = reservation.getStart();
 		this.end = reservation.getEnd();
-		this.user = reservation.getUser().getId();
+		if(reservation.getUser() != null) this.user = reservation.getUser().getId();
 		this.apartment = new ApartmentDTO(reservation.getApartment());
 		this.realised = reservation.getRealised();
 	}

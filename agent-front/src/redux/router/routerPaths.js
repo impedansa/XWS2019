@@ -1,0 +1,5 @@
+export const APARTMENTS = 'APARTMENTS'
+export const LOGIN = 'LOGIN'
+export const INBOX = 'INBOX'
+export const RESERVATIONS = 'RESERVATIONS'
+export const CHAT = 'CHAT'
